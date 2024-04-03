@@ -1,7 +1,13 @@
 name: Build ROCK
 
 on:
+  pull_request:
   workflow_call:
+    outputs:
+      rock:
+        description: "The rock output of build process."
+        value: ${{ jobs.build.outputs.rock }}
+
 
 jobs:
   lint:
