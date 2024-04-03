@@ -79,7 +79,7 @@ jobs:
 
       - name: Import and push to GHCR
         run: |
-      
+          ls
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
@@ -87,17 +87,17 @@ jobs:
           IMAGE_NAME="ghcr.io/welpaolo/charmed-spark-configuration-hub"
 
           ROCK_FILE=${{ needs.build.outputs.rock }}
-
+          echo "Rock file: $ROCK_FILE"
           sudo skopeo --insecure-policy copy \
             oci-archive:${ROCK_FILE} \
             docker-daemon:${IMAGE_NAME}:${TAG}
-
+          echo "1"
           COMMIT_ID=$(git log -1 --format=%H)
           DESCRIPTION=$(yq .description rockcraft.yaml | xargs)
           
           # Add relevant labels
           echo "FROM ${IMAGE_NAME}:${TAG}" | docker build --label org.opencontainers.image.description="${DESCRIPTION}" --label org.opencontainers.image.revision="${COMMIT_ID}" --label org.opencontainers.image.source="${{ github.repositoryUrl }}" -t "${IMAGE_NAME}:${TAG}" -
-
+          echo "2"
           echo "Publishing ${IMAGE_NAME}:${TAG}"          
           docker push ${IMAGE_NAME}:${TAG}
           
@@ -109,3 +109,4 @@ jobs:
             echo "Publishing ${IMAGE_NAME}:${VERSION_TAG}"          
             docker push ${IMAGE_NAME}:${VERSION_TAG}
           fi
+          echo "3"
