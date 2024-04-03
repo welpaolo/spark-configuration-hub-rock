@@ -83,9 +83,9 @@ jobs:
           RISK=${{ needs.release_checks.outputs.risk }}
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
-      
+          echo "---------------------"
           IMAGE_NAME="ghcr.io/welpaolo/charmed-spark-configuration-hub"
-
+          echo "ROCK: ${{ needs.build.outputs.rock }}"
           ROCK_FILE=${{ needs.build.outputs.rock }}
           echo "Rock file: $ROCK_FILE"
           sudo skopeo --insecure-policy copy \
