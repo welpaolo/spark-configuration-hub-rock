@@ -40,7 +40,7 @@ jobs:
         run: |
           rockcraft pack --verbose
           VERSION=$(yq '.version' rockcraft.yaml)
-          echo "rock=spark-configuration-hub_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
+          echo "rock=charmed-spark-configuration-hub_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
 
       - name: Change artifact permissions
         run: sudo chmod a+r ${{ steps.build.outputs.rock }}
