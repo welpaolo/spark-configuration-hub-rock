@@ -76,7 +76,7 @@ parts:
     after: [ spark8t]
     source: scripts
     organize:
-      monitor_sa.py : opt/scripts/monitor_sa.py      
+      monitor_sa.py : opt/scripts/monitor_sa.py
     stage:
       - opt/scripts/monitor_sa.py
 
