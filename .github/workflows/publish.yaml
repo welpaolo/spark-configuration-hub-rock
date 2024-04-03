@@ -85,6 +85,8 @@ jobs:
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
           echo "---------------------"
           IMAGE_NAME="ghcr.io/welpaolo/charmed-spark-configuration-hub"
+          echo "RISK: $RISK"
+          echo "TRACK: $TRACK"
           echo "ROCK: ${{ needs.build.outputs.rock }}"
           ROCK_FILE=${{ needs.build.outputs.rock }}
           echo "Rock file: $ROCK_FILE"
