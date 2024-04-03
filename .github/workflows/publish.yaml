@@ -82,7 +82,7 @@ jobs:
           TRACK=${{ needs.release_checks.outputs.track }}
           if [ ! -z "$RISK" ] && [ "${RISK}" != "no-risk" ]; then TAG=${TRACK}_${RISK}; else TAG=${TRACK}; fi
       
-          IMAGE_NAME="ghcr.io/canonical/spark-configuration-hub"
+          IMAGE_NAME="ghcr.io/welpaolo/spark-configuration-hub"
 
           ROCK_FILE=${{ needs.build.outputs.rock }}
 
