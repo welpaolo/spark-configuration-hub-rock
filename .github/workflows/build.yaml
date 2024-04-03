@@ -40,15 +40,15 @@ jobs:
         run: |
           rockcraft pack --verbose
           VERSION=$(yq '.version' rockcraft.yaml)
-          echo "rock=charmed-spark-configuration-hub_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
+          echo "name=charmed-spark-configuration-hub_${VERSION}_amd64.rock" >> $GITHUB_OUTPUT
 
       - name: Change artifact permissions
-        run: sudo chmod a+r ${{ steps.build.outputs.rock }}
+        run: sudo chmod a+r ${{ steps.build.outputs.name }}
 
       - name: Upload locally built artifact
         uses: actions/upload-artifact@v4
         with:
           name: spark-configuration-hub
-          path:  ${{ steps.artifact.outputs.name }}
+          path:  ${{ steps.build.outputs.name }}
     outputs:
-      rock: ${{ steps.build.outputs.rock }}
+      rock: ${{ steps.build.outputs.name }}
