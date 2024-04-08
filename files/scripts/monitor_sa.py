@@ -66,7 +66,7 @@ if __name__ == "__main__":
         logger.info(f"Operation: {op}")
         logger.info(f"Service account: {sa_name} --- namespace: {namespace}")
         # skip in case of deletion or operation that do not need secret update.
-
+        logger.info(f"Config file: {args.config}")
         options = read_configuration_file(args.config)
         if options:
             logger.info(f"Number of options: {len(options)}")
