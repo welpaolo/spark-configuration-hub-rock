@@ -1,4 +1,4 @@
-name: charmed-spark-configuration-hub
+name: charmed-spark-configuration-hubproperties
 summary: Charmed Spark Configuration Hub
 description: |
   This is an OCI image that bundles blabla...
@@ -18,10 +18,11 @@ environment:
   JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
   PYTHONPATH: /opt/spark/python:/opt/spark8t/python/dist:/usr/lib/python3.10/site-packages
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  SPARK_PROPERTIES_FILE: /etc/hub/conf/spark-defaults.conf
 
 services:
   configuration-hub:
-    command: "python3 -m opt.scripts.monitor_sa --app-name=configuration-hub --config=/opt/hub/conf/spark-defaults.conf"
+    command: "python3 -m opt.scripts.monitor_sa --app-name=configuration-hub --config=$SPARK_PROPERTIES_FILE"
     summary: "This is the service to startup the process that monitor Spark8t's service accounts."
     override: replace
     startup: enabled
