@@ -26,7 +26,7 @@ environment:
 
 services:
   configuration-hub:
-    command: "python3 -m opt.scripts.monitor_sa --app-name=configuration-hub --config=/tmp/test.conf"
+    command: "python3 -m opt.scripts.monitor_sa --app-name=configuration-hub --config=/opt/hub/conf/spark-defaults.conf"
     summary: "This is the service to startup the process that monitor Spark8t's service accounts."
     override: replace
     startup: enabled
@@ -71,18 +71,20 @@ parts:
     stage:
       - usr/local/bin
 
-  charmed-spark:
+  hub-files:
     plugin: dump
     after: [ spark8t]
-    source: scripts
+    source: files
     organize:
-      monitor_sa.py : opt/scripts/monitor_sa.py
+      scripts/monitor_sa.py : opt/hub/scripts/monitor_sa.py
+      spark/conf/spark-defaults.conf: etc/hub/conf/spark-defaults.conf
     stage:
-      - opt/scripts/monitor_sa.py
+      - opt/hub/scripts/monitor_sa.py
+      - etc/hub/conf/spark-defaults.conf
 
   user-setup:
     plugin: nil
-    after: [ charmed-spark ]
+    after: [ hub-files ]
     overlay-packages:
       - python3
       - openjdk-11-jre-headless
@@ -95,5 +97,10 @@ parts:
 
       craftctl default
 
-      chown -R ${HUB_GID}:${HUB_UID} opt/scripts
-      chmod -R 750 opt/scripts
+      chown -R ${HUB_GID}:${HUB_UID} opt/
+      chmod -R 750 opt/
+
+      chown -R ${HUB_GID}:${HUB_UID} etc/
+      chmod -R 750 etc/
+
+
