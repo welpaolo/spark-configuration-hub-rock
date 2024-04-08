@@ -1,4 +1,4 @@
-name: charmed-spark-configuration-hubproperties
+name: charmed-spark-configuration-hub
 summary: Charmed Spark Configuration Hub
 description: |
   This is an OCI image that bundles blabla...
