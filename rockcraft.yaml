@@ -18,7 +18,6 @@ environment:
   JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
   PYTHONPATH: /opt/spark/python:/opt/spark8t/python/dist:/usr/lib/python3.10/site-packages
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  
 
 services:
   configuration-hub:
