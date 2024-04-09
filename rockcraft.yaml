@@ -22,7 +22,7 @@ environment:
 
 services:
   configuration-hub:
-    command: "python3 -m opt.scripts.monitor_sa --app-name=configuration-hub --config=$SPARK_PROPERTIES_FILE"
+    command: "python3 -m opt.hub.scripts.monitor_sa --app-name=configuration-hub --config=$SPARK_PROPERTIES_FILE"
     summary: "This is the service to startup the process that monitor Spark8t's service accounts."
     override: replace
     startup: enabled
