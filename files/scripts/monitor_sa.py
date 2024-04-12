@@ -98,6 +98,7 @@ if __name__ == "__main__":
                 "metadata": {
                     "name": secret_name,
                     "namespace": namespace,
+                    "labels": {"app.kubernetes.io/managed-by": "configuration-hub"}
                 },
                 "stringData": options if options else {},
             }
