@@ -15,6 +15,7 @@ from lightkube.core.exceptions import ApiError
 from lightkube.resources.core_v1 import Secret, ServiceAccount
 
 from spark8t.utils import PercentEncodingSerializer
+from spark8t.literals import HUB_LABEL
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -77,7 +78,7 @@ if __name__ == "__main__":
         else:
             logger.info("Empty configuration. No secret to update.")
 
-        secret_name = f"configuration-hub-conf-{sa_name}"
+        secret_name = f"{HUB_LABEL}-{sa_name}"
         # if secret is already there, delete it.
         try:
             s = client.get(Secret, name=secret_name, namespace=namespace)
